@@ -1,0 +1,35 @@
+@model List<Movie>
+
+    <div class="row">
+        <div class="col-12">
+            <h2>Post List</h2>
+            <table class="table tabled-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th style="width: 200px;">Image</th>
+                        <th>Title</th>
+
+                        <th style="width: 125px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                    <tr>
+                        <td><img src="/img/@item.ImageName" class="img-fluid" alt=""></td>
+                        <td>@item.MovieName</td>
+
+                        <td>
+                            <a href="/admin/Edit/@item.MovieId" class="btn btn-sm btn-primary">Edit</a>
+                            <form asp-action="Delete" method="post" onsubmit="return confirm('emin misiniz')"
+                                style="display: inline-block;">
+                                <input type="hidden" value="@item.MovieId" name="id">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

@@ -1,0 +1,56 @@
+@model MovieViewModel
+<h2>Add Movie</h2>
+
+
+
+
+
+<form asp-controller="Admin" asp-action="AddMovie" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+
+    <div class="mb-3">
+        <label asp-for="MovieName" class="form-label"></label>
+        <input asp-for="MovieName" class="form-control">
+        <span asp-validation-for="MovieName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Year" class="form-label"></label>
+        <input asp-for="Year" class="form-control">
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ImageName" class="form-label"></label>
+        <input type="file" name="imageFile" id="imageFile" class="form-control">
+
+        <span asp-validation-for="ImageName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="MovieDescription" class="form-label"></label>
+        <input asp-for="MovieDescription" class="form-control">
+        <span asp-validation-for="MovieDescription" class="text-danger"></span>
+    </div>
+    @foreach(var cat in ViewBag.Category)
+    {
+
+    <div class="form-check">
+        <input class="form-check-input" name="CategoryId" type="checkbox" value="@cat.CategoryId" id="@cat.CategoryId">
+        <label class="form-check-label" for="cat.CategoryId">
+            @cat.CategoryName
+        </label>
+    </div>
+    }
+    <button type="submit" class="btn btn-primary">Add Movie</button>
+    <script type="text/javascript">
+
+
+        $('input[type="checkbox"]').on('change', function () {
+            $('input[type="checkbox"]').not(this).prop('checked', false);
+        });
+
+
+    </script>
+</form>
+<div>
+
+</div>

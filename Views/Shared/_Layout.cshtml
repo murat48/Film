@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Film</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var docHeight = $(window).height();
+            var footerHeight = $('#footer').height();
+            var footerTop = $('#footer').position().top + footerHeight;
+
+            if (footerTop < docHeight)
+                $('#footer').css('margin-top', 10 + (docHeight - footerTop) + 'px');
+        });
+    </script>
+    <!-- <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                var docHeight = $(window).height();
+                var footerHeight = $('#footer').height();
+                var footerTop = $('#footer').position().top + footerHeight;
+                var marginTop = (docHeight - footerTop + 10);
+
+                if (footerTop < docHeight)
+                    $('#footer').css('margin-top', marginTop + 'px'); // padding of 30 on footer
+                else
+                    $('#footer').css('margin-top', '0px');
+                // console.log("docheight: " + docHeight + "\n" + "footerheight: " + footerHeight + "\n" + "footertop: " + footerTop + "\n" + "new docheight: " + $(window).height() + "\n" + "margintop: " + marginTop);
+            }, 250);
+        });
+    </script> -->
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script>
+        $('input[type="checkbox"]').on('change', function () {
+            $('input[type="checkbox"]').not(this).prop('checked', false);
+        });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav ms-auto">
+
+
+                    <li class="nav-item">
+                        <a asp-controller="Admin" class="nav-link" asp-action="CreateCategory">Add Category </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="AddMovie">Add Movie </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="List">Edit Movie </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-3">
+        @RenderBody()
+    </div>
+
+    <div id="footer" class="container-fluid "
+        style="background-color:#2b394a; height:auto;color:#ffffff;font-size:18px;">
+
+        <a style="color:#ffffff;font-weight:bold;font-family:Perpetua">&copy; 2024 -
+        </a>
+        <br>
+    </div>
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

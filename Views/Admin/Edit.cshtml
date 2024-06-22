@@ -1,0 +1,71 @@
+@model MovieViewModel
+
+<form action="Edit" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-9">
+            <div class="bg-white p-4">
+                <h1>Post Edit</h1>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="MovieId">
+                <div class="mb-3">
+                    <label asp-for="MovieName" class="form-label"></label>
+                    <input asp-for="MovieName" class="form-control">
+                    <span asp-validation-for="MovieName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Year" class="form-label"></label>
+                    <input asp-for="Year" class="form-control">
+                    <span asp-validation-for="Year" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ImageName" class="form-label"></label>
+                    <input type="file" name="imageFile" id="imageFile" class="form-control">
+
+                    <span asp-validation-for="ImageName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="MovieDescription" class="form-label"></label>
+                    <textarea asp-for="MovieDescription" class="form-control"></textarea>
+                    <span asp-validation-for="MovieDescription" class="text-danger"></span>
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="bg-white p-4">
+
+                @foreach(var cat in ViewBag.categories)
+                {
+                <div class="form-check">
+                    <input class="form-check-input" name="CategoryId" type="checkbox" value="@cat.CategoryId"
+                        id="@cat.CategoryId" @(Model.Category.Any(i=> i.CategoryId ==cat.CategoryId)?"checked" :"")>
+                    <label class="form-check-label" for="@cat.CategoryId">
+                        @cat.CategoryName
+                    </label>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.7.0/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#MovieDescription'
+    });
+</script>
+<script type="text/javascript">
+
+
+    $('input[type="checkbox"]').on('change', function () {
+        $('input[type="checkbox"]').not(this).prop('checked', false);
+    });
+
+
+</script>
+}
